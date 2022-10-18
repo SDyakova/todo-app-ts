@@ -1,0 +1,22 @@
+li {
+  list-style: none;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid lightgray;
+}
+
+.checkbox_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  margin: 0 12px 0 0;
+  margin-right: 12px;
+  width: 24px;
+  height: 24px;
+}

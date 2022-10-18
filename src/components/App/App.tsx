@@ -8,7 +8,7 @@ import classes from "./App.module.scss";
 const App = () => {
   return (
     <div className={classes.app}>
-      <main>
+      <main className={classes.main}>
         <NewTaskForm />
         <TaskList />
         <Footer />
