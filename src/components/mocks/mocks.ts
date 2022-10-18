@@ -1,9 +1,5 @@
-import { TaskModel } from "../types/types";
-
-let maxId = 100;
-
 export const mockData = [
-  { id: maxId++, title: "Task1" },
-  { id: maxId++, title: "Task2" },
-  { id: maxId++, title: "Task3" },
+  { id: 5001, title: "Task1" },
+  { id: 5002, title: "Task2" },
+  { id: 5003, title: "Task3" },
 ];

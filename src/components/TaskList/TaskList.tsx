@@ -4,9 +4,14 @@ import Task from "../Task";
 import { mockData } from "../mocks/mocks";
 
 import classes from "./TaskList.module.scss";
+import { TaskModel } from "../types/types";
 
-const TaskList = () => {
-  const list = mockData.map(({ id, title }) => (
+interface TaskListProps {
+  taskItems: TaskModel[];
+}
+
+const TaskList = ({ taskItems }: TaskListProps) => {
+  const list = taskItems.map(({ id, title }) => (
     <Task key={id} id={id} title={title} />
   ));
   return <ul className={classes.list}>{list}</ul>;
