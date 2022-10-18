@@ -5,8 +5,10 @@ li {
 .input {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 18px;
   border: 1px solid lightgray;
+  border-radius: 4px;
 }
 
 .checkbox_wrapper {
