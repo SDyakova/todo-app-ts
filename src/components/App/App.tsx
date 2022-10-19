@@ -26,11 +26,22 @@ const App = () => {
     }
   };
 
+  const deleteTask = (id: number) => {
+    console.log(id);
+    setAppState((appState) => {
+      const newArr = taskItems.filter((task) => task.id !== id);
+      return {
+        ...appState,
+        taskItems: newArr,
+      };
+    });
+  };
+
   return (
     <div className={classes.app}>
       <main className={classes.main}>
         <NewTaskForm addTask={addTask} />
-        <TaskList taskItems={taskItems} />
+        <TaskList taskItems={taskItems} onDeleted={deleteTask} />
         <Footer />
       </main>
     </div>

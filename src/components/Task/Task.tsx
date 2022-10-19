@@ -5,7 +5,11 @@ import Button from "../Button";
 
 import classes from "./Task.module.scss";
 
-const Task = ({ id, title }: TaskModel) => {
+type TaskProps = TaskModel & {
+  onDeleted: (id: number) => void;
+};
+
+const Task = ({ id, title, onDeleted }: TaskProps) => {
   return (
     <li className={classes.input}>
       <label className={classes.checkbox_wrapper}>
@@ -14,7 +18,7 @@ const Task = ({ id, title }: TaskModel) => {
       </label>
       <div>
         <Button title="Edit" type="edit" />
-        <Button title="Delete" type="delete" />
+        <Button title="Delete" type="delete" onDeleted={() => onDeleted(id)} />
       </div>
     </li>
   );
