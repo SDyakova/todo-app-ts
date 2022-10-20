@@ -6,13 +6,19 @@ interface ButtonProps {
   title: string;
   type: string;
   onDeleted?: (id: React.MouseEvent<HTMLElement>) => void;
+  handleButtonEditClick?: () => void;
 }
 
-const Button = ({ title, type, onDeleted }: ButtonProps) => {
+const Button = ({
+  title,
+  type,
+  onDeleted,
+  handleButtonEditClick,
+}: ButtonProps) => {
   return (
     <button
       className={`${classes.btn} ${classes[type] ? classes[type] : ""}`}
-      onClick={onDeleted}
+      onClick={onDeleted || handleButtonEditClick}
     >
       {title}
     </button>

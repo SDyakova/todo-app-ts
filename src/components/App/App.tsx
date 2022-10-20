@@ -23,11 +23,11 @@ const App = () => {
         ...appState,
         taskItems: [...taskItems, { id: maxId++, title: e.target.value }],
       }));
+      e.target.value = "";
     }
   };
 
   const deleteTask = (id: number) => {
-    console.log(id);
     setAppState((appState) => {
       const newArr = taskItems.filter((task) => task.id !== id);
       return {
@@ -37,11 +37,25 @@ const App = () => {
     });
   };
 
+  const editTask = (id: number, title: string) => {
+    setAppState((appState) => {
+      const newArr = taskItems.map((task) =>
+        task.id === id ? { ...task, title } : task
+      );
+
+      return { ...appState, taskItems: newArr };
+    });
+  };
+
   return (
     <div className={classes.app}>
       <main className={classes.main}>
         <NewTaskForm addTask={addTask} />
-        <TaskList taskItems={taskItems} onDeleted={deleteTask} />
+        <TaskList
+          taskItems={taskItems}
+          onDeleted={deleteTask}
+          onEditingTask={editTask}
+        />
         <Footer />
       </main>
     </div>
