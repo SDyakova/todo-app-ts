@@ -8,9 +8,17 @@ import classes from "./Task.module.scss";
 type TaskProps = TaskModel & {
   onDeleted: (id: number) => void;
   onEditingTask: (id: number, title: string) => void;
+  onCompleted: (id: React.MouseEvent<HTMLElement>) => void;
 };
 
-const Task = ({ id, title, onDeleted, onEditingTask }: TaskProps) => {
+const Task = ({
+  id,
+  title,
+  isCompleted,
+  onDeleted,
+  onEditingTask,
+  onCompleted,
+}: TaskProps) => {
   const initialState = {
     isEditing: false,
     inputValue: title,
@@ -48,8 +56,12 @@ const Task = ({ id, title, onDeleted, onEditingTask }: TaskProps) => {
     <li>
       <label className={classes.input}>
         <div className={classes.checkbox_wrapper}>
-          <input type="checkbox" className={classes.checkbox}></input>
-          <span>{title}</span>
+          <input
+            type="checkbox"
+            className={classes.checkbox}
+            onClick={onCompleted}
+          ></input>
+          <span className={isCompleted ? classes.completed : ""}>{title}</span>
         </div>
         <div>
           <Button

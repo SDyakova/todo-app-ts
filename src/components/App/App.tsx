@@ -21,7 +21,10 @@ const App = () => {
     if (e.key === "Enter") {
       setAppState((appState) => ({
         ...appState,
-        taskItems: [...taskItems, { id: maxId++, title: e.target.value }],
+        taskItems: [
+          ...taskItems,
+          { id: maxId++, title: e.target.value, isCompleted: false },
+        ],
       }));
       e.target.value = "";
     }
@@ -47,6 +50,16 @@ const App = () => {
     });
   };
 
+  const onToggleCompleted = (id: number) => {
+    setAppState((appState) => {
+      const newArr = taskItems.map((task) =>
+        task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
+      );
+
+      return { ...appState, taskItems: newArr };
+    });
+  };
+
   return (
     <div className={classes.app}>
       <main className={classes.main}>
@@ -55,6 +68,7 @@ const App = () => {
           taskItems={taskItems}
           onDeleted={deleteTask}
           onEditingTask={editTask}
+          onCompleted={onToggleCompleted}
         />
         <Footer />
       </main>
