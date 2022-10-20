@@ -1,10 +1,9 @@
 import React from "react";
 
 import Task from "../Task";
-import { mockData } from "../mocks/mocks";
+import { TaskModel } from "../types/types";
 
 import classes from "./TaskList.module.scss";
-import { TaskModel } from "../types/types";
 
 interface TaskListProps {
   taskItems: TaskModel[];
