@@ -7,6 +7,7 @@ interface ButtonProps {
   type: string;
   onDeleted?: (id: React.MouseEvent<HTMLElement>) => void;
   handleButtonEditClick?: () => void;
+  onFiltered?: (title: React.MouseEvent<HTMLElement>) => void;
 }
 
 const Button = ({
@@ -14,11 +15,12 @@ const Button = ({
   type,
   onDeleted,
   handleButtonEditClick,
+  onFiltered,
 }: ButtonProps) => {
   return (
     <button
       className={`${classes.btn} ${classes[type] ? classes[type] : ""}`}
-      onClick={onDeleted || handleButtonEditClick}
+      onClick={onDeleted || handleButtonEditClick || onFiltered}
     >
       {title}
     </button>

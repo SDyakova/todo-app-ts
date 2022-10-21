@@ -5,11 +5,15 @@ import TaskFilter from "../TaskFilter";
 
 import classes from "./Footer.module.scss";
 
-const Footer = () => {
+interface FooterProps {
+  onFiltered: (title: string) => void;
+}
+
+const Footer = ({ onFiltered }: FooterProps) => {
   return (
     <footer className={classes.footer}>
       <span>1 items left</span>
-      <TaskFilter />
+      <TaskFilter onFiltered={onFiltered} />
       <Button title="Clear completed" type="clear completed" />
     </footer>
   );

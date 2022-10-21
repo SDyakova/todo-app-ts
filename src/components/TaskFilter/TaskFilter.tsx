@@ -3,7 +3,11 @@ import Button from "../Button";
 
 import classes from "./TaskFilter.module.scss";
 
-const TaskFilter = () => {
+interface TaskFilterProps {
+  onFiltered: (title: string) => void;
+}
+
+const TaskFilter = ({ onFiltered }: TaskFilterProps) => {
   const taskFilterBtns = [
     { title: "All", id: "b1" },
     { title: "Active", id: "b2" },
@@ -11,7 +15,12 @@ const TaskFilter = () => {
   ];
 
   const btnsList = taskFilterBtns.map(({ title, id }) => (
-    <Button title={title} type="filter" key={id} />
+    <Button
+      title={title}
+      type="filter"
+      key={id}
+      onFiltered={() => onFiltered(title)}
+    />
   ));
   return <div>{btnsList}</div>;
 };

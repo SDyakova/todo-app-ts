@@ -4,6 +4,7 @@ import Footer from "../Footer";
 import { mockData } from "../mocks/mocks";
 import NewTaskForm from "../NewTaskForm";
 import TaskList from "../TaskList";
+import { AppStateModel } from "../types/types";
 
 import classes from "./App.module.scss";
 
@@ -12,10 +13,12 @@ export let maxId = 100;
 const App = () => {
   const initialState = {
     taskItems: [...mockData],
+    filteredItems: [],
+    currentFilter: "All",
   };
 
-  const [appState, setAppState] = useState(initialState);
-  const { taskItems } = appState;
+  const [appState, setAppState] = useState<AppStateModel>(initialState);
+  const { taskItems, currentFilter, filteredItems } = appState;
 
   const addTask = (e: { key: string; target: { value: any } }) => {
     if (e.key === "Enter") {
@@ -60,17 +63,37 @@ const App = () => {
     });
   };
 
+  const getFilteredItems = (title: string) => {
+    setAppState((appState) => {
+      let filteredItems = [];
+
+      if (title === "Completed") {
+        filteredItems = taskItems.filter((task) => task.isCompleted);
+      } else if (title === "Active") {
+        filteredItems = taskItems.filter((task) => !task.isCompleted);
+      } else {
+        filteredItems = taskItems;
+      }
+
+      return {
+        ...appState,
+        filteredItems: filteredItems,
+        currentFilter: title,
+      };
+    });
+  };
+
   return (
     <div className={classes.app}>
       <main className={classes.main}>
         <NewTaskForm addTask={addTask} />
         <TaskList
-          taskItems={taskItems}
+          taskItems={currentFilter === "All" ? taskItems : filteredItems}
           onDeleted={deleteTask}
           onEditingTask={editTask}
           onCompleted={onToggleCompleted}
         />
-        <Footer />
+        <Footer onFiltered={getFilteredItems} />
       </main>
     </div>
   );
