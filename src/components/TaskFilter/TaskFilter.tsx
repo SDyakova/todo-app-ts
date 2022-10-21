@@ -5,9 +5,10 @@ import classes from "./TaskFilter.module.scss";
 
 interface TaskFilterProps {
   onFiltered: (title: string) => void;
+  currentFilter: string;
 }
 
-const TaskFilter = ({ onFiltered }: TaskFilterProps) => {
+const TaskFilter = ({ onFiltered, currentFilter }: TaskFilterProps) => {
   const taskFilterBtns = [
     { title: "All", id: "b1" },
     { title: "Active", id: "b2" },
@@ -20,6 +21,7 @@ const TaskFilter = ({ onFiltered }: TaskFilterProps) => {
       type="filter"
       key={id}
       onFiltered={() => onFiltered(title)}
+      isSelected={currentFilter === title}
     />
   ));
   return <div>{btnsList}</div>;

@@ -83,6 +83,18 @@ const App = () => {
     });
   };
 
+  const handlerClearCompleted = () => {
+    const newState = taskItems.filter((task) => !task.isCompleted);
+
+    setAppState((appState) => {
+      return {
+        ...appState,
+        taskItems: newState,
+        filteredItems: newState,
+      };
+    });
+  };
+
   return (
     <div className={classes.app}>
       <main className={classes.main}>
@@ -93,7 +105,12 @@ const App = () => {
           onEditingTask={editTask}
           onCompleted={onToggleCompleted}
         />
-        <Footer onFiltered={getFilteredItems} />
+        <Footer
+          onFiltered={getFilteredItems}
+          onClearCompleted={handlerClearCompleted}
+          taskItems={taskItems}
+          currentFilter={currentFilter}
+        />
       </main>
     </div>
   );
