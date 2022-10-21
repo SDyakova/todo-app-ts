@@ -20,15 +20,18 @@ const App = () => {
   const [appState, setAppState] = useState<AppStateModel>(initialState);
   const { taskItems, currentFilter, filteredItems } = appState;
 
-  const addTask = (e: { key: string; target: { value: any } }) => {
+  const addTask = (e: { key: string; target: { value: string } }) => {
+    const newTask = { id: maxId++, title: e.target.value, isCompleted: false };
+
     if (e.key === "Enter") {
-      setAppState((appState) => ({
-        ...appState,
-        taskItems: [
-          ...taskItems,
-          { id: maxId++, title: e.target.value, isCompleted: false },
-        ],
-      }));
+      if (e.target.value.trim() !== "") {
+        setAppState((appState) => {
+          return { ...appState, taskItems: [...taskItems, newTask] };
+        });
+      } else {
+        alert("Task cannot be empty");
+      }
+
       e.target.value = "";
     }
   };

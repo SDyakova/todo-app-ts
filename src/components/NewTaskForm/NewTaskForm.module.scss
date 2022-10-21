@@ -1,10 +1,11 @@
 .input {
   width: 100%;
-  padding: 18px;
   font-size: 24px;
   box-sizing: border-box;
   border: 1px solid lightgray;
   outline: none;
+
+  padding: 18px;
 
   &::placeholder {
     color: rgb(203, 200, 200);
